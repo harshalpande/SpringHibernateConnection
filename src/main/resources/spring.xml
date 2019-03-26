@@ -2,35 +2,19 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx">
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc">
 
 	<context:annotation-config />
 
-	<tx:annotation-driven/>
+
 
 	<context:component-scan
 		base-package="com.javabrains"></context:component-scan>
-
-	<!-- <bean id="employee" class="com.javabrains.model.Employee"> <property 
-		name="empid" value="pandehar"></property> <property name="name" value="Harshal 
-		Pande"></property> <property name="age" value="31"></property> <property 
-		name="city" value="Pune"></property> <property name="mobileNumber" value="9096008594"></property> 
-		<property name="listOfVehicles"> <list value-type="com.javabrains.model.Vehicle"> 
-		<ref bean="vehicle-bike" /> <ref bean="vehicle-car" /> </list> </property> 
-		</bean> <bean id="vehicle-bike" class="com.javabrains.model.Vehicle"> <property 
-		name="registrationNumber" value="MH12-HW-5545"></property> <property name="type" 
-		value="bike"></property> <property name="numberOfWheels" value="2"></property> 
-		<property name="seatingCapacity" value="2"></property> <property name="engineCC" 
-		value="149"></property> <property name="modelYear" value="2012"></property> 
-		</bean> <bean id="vehicle-car" class="com.javabrains.model.Vehicle"> <property 
-		name="registrationNumber" value="MH12-QY-0684"></property> <property name="type" 
-		value="car"></property> <property name="numberOfWheels" value="4"></property> 
-		<property name="seatingCapacity" value="4"></property> <property name="engineCC" 
-		value="999"></property> <property name="modelYear" value="2018"></property> 
-		</bean> -->
-
 
 	<!-- Data Source Configuration -->
 	<bean id="dataSource"
@@ -76,6 +60,7 @@
 		</property>
 	</bean>
 
+	<tx:annotation-driven />
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
@@ -96,8 +81,17 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
-	<bean id="employeeManager" class="com.javabrains.dao.EmployeeManagerImpl">
+	<bean id="employeeManager"
+		class="com.javabrains.dao.EmployeeManagerImpl">
 		<property name="iEmployeeDAO" ref="iEmployeeDAO"></property>
 	</bean>
+
+	<mvc:interceptors>
+		<bean id="openSessionInViewInterceptor" 
+			class="org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor">
+			<property name="sessionFactory" ref="sessionFactory">
+			</property>
+		</bean>
+	</mvc:interceptors>
 
 </beans>

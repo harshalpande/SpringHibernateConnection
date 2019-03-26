@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.javabrains.model" default-lazy="false">
+<hibernate-mapping package="com.javabrains.model" default-lazy="true">
 	<class name="Employee" table="EMPLOYEE">
 		<meta attribute="class-description">
 			This class contains the Person details.
@@ -26,7 +26,7 @@
 			type="java.lang.String">
 		</property>
 
-		<set name="vehicles" inverse="true" cascade="all">
+		<set name="vehicles" inverse="false" cascade="all">
 			<key column="EMPLOYEE_ID" not-null="true"></key>
 			<one-to-many class="Vehicle" />
 		</set>

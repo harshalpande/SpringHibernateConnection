@@ -3,7 +3,7 @@
 "-//Hibernate/Hibernate Mapping DTD//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="com.javabrains.model" default-lazy="false">
+<hibernate-mapping package="com.javabrains.model" default-lazy="true">
 	<class name="Vehicle" table="VEHICLE">
 
 		<meta attribute="class-description">
@@ -23,9 +23,6 @@
 			type="java.lang.Integer"></property>
 		<property name="modelYear" column="MODEL_YEAR"
 			type="java.lang.String"></property>
-
-		<many-to-one name="Employee" class="Employee"
-			column="EMPLOYEE_ID" not-null="true"></many-to-one>
 
 	</class>
 
