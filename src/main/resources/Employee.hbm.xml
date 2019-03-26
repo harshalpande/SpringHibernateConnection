@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.javabrains.model" default-lazy="false">
+	<class name="Employee" table="EMPLOYEE">
+		<meta attribute="class-description">
+			This class contains the Person details.
+		</meta>
+
+		<id name="empid" column="EMPLOYEE_ID" type="java.lang.String">
+			<!-- <generator class="native"> </generator> -->
+		</id>
+
+		<property name="name" column="NAME" type="java.lang.String">
+		</property>
+
+		<property name="age" column="AGE" type="java.lang.Integer">
+		</property>
+
+		<property name="city" column="CITY" type="java.lang.String">
+		</property>
+
+		<property name="mobileNumber" column="MOBILE_NUMBER"
+			type="java.lang.String">
+		</property>
+
+		<set name="vehicles" inverse="true" cascade="all">
+			<key column="EMPLOYEE_ID" not-null="true"></key>
+			<one-to-many class="Vehicle" />
+		</set>
+
+	</class>
+
+</hibernate-mapping>

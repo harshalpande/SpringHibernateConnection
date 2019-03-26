@@ -1,18 +1,25 @@
 package com.javabrains.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import java.util.List;
+
+import javax.persistence.FlushModeType;
+
+import org.hibernate.Session;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.javabrains.model.Employee;
 
-public class EmployeeDao {
+@Transactional
+public class EmployeeDao extends HibernateDaoSupport implements IEmployeeDAO {
 	
-	@Autowired
-	JdbcTemplate jdbcTemplate;
-	
-	public void saveToDataBase(Employee employee) {
-		String sql = "INSERT INTO EMPLOYEE (empid, name, age, city, mobileNumber) values ('pandehar', 'Harshal Pande', 31, 'Pune', '9096008594')";
-		jdbcTemplate.update(sql);
+	public void saveEmployee(Employee employee) {
+		getHibernateTemplate().getSessionFactory().getCurrentSession().setFlushMode(FlushModeType.AUTO);
+		getHibernateTemplate().save(employee);
 	}
 
+	public List<Employee> fetchAllEmployees() {
+		Session session = getHibernateTemplate().getSessionFactory().getCurrentSession();
+		return getHibernateTemplate().loadAll(Employee.class);
+	}
 }

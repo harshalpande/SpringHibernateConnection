@@ -1,6 +1,6 @@
 package com.javabrains.model;
 
-import java.util.List;
+import java.util.Set;
 
 public class Employee {
 	
@@ -9,7 +9,7 @@ public class Employee {
 	private Integer age;
 	private String city;
 	private String mobileNumber;
-	private List<Vehicle> listOfVehicles;
+	private Set<Vehicle> vehicles;
 	
 	public Employee() {
 		// TODO Auto-generated constructor stub
@@ -18,18 +18,17 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [empid=" + empid + ", name=" + name + ", age=" + age + ", city=" + city + ", mobileNumber="
-				+ mobileNumber + ", listOfVehicles=" + listOfVehicles + "]";
+				+ mobileNumber + ", vehicles=" + vehicles + "]";
 	}
 
-	public Employee(String empid, String name, Integer age, String city, String mobileNumber,
-			List<Vehicle> listOfVehicles) {
+	public Employee(String empid, String name, Integer age, String city, String mobileNumber, Set<Vehicle> vehicles) {
 		super();
 		this.empid = empid;
 		this.name = name;
 		this.age = age;
 		this.city = city;
 		this.mobileNumber = mobileNumber;
-		this.listOfVehicles = listOfVehicles;
+		this.vehicles = vehicles;
 	}
 
 	public String getEmpid() {
@@ -72,11 +71,14 @@ public class Employee {
 		this.mobileNumber = mobileNumber;
 	}
 
-	public List<Vehicle> getListOfVehicles() {
-		return listOfVehicles;
+
+	public Set<Vehicle> getVehicles() {
+		return vehicles;
 	}
 
-	public void setListOfVehicles(List<Vehicle> listOfVehicles) {
-		this.listOfVehicles = listOfVehicles;
+
+	public void setVehicles(Set<Vehicle> vehicles) {
+		this.vehicles = vehicles;
 	}
+
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.javabrains.model" default-lazy="false">
+	<class name="Vehicle" table="VEHICLE">
+
+		<meta attribute="class-description">
+			This class contains the Vehicle details.
+		</meta>
+
+		<id name="registrationNumber" column="REGISTRATION_NUMBER">
+			<!-- <generator class="native"></generator> -->
+		</id>
+
+		<property name="type" column="TYPE" type="java.lang.String"></property>
+		<property name="numberOfWheels" column="NUMBER_OF_WHEELS"
+			type="java.lang.Integer"></property>
+		<property name="seatingCapacity" column="SEATING_CAPACITY"
+			type="java.lang.Integer"></property>
+		<property name="engineCC" column="ENGINE_CC"
+			type="java.lang.Integer"></property>
+		<property name="modelYear" column="MODEL_YEAR"
+			type="java.lang.String"></property>
+
+		<many-to-one name="Employee" class="Employee"
+			column="EMPLOYEE_ID" not-null="true"></many-to-one>
+
+	</class>
+
+</hibernate-mapping>
