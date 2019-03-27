@@ -1,21 +1,10 @@
 package com.javabrains.SpringHibernateConnection;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-
 import com.javabrains.dao.EmployeeManagerImpl;
 import com.javabrains.dao.IEmployeeManager;
-import com.javabrains.model.Employee;
 import com.javabrains.model.Vehicle;
 
 public class SpringHibernateConnectionApplication {
@@ -43,17 +32,9 @@ public class SpringHibernateConnectionApplication {
 		
 		employeeManager.saveEmployee(employee);*/
 			
-		/*HibernateTransactionManager bean = context.getBean(HibernateTransactionManager.class);
-		SessionFactory sessionFactory = bean.getSessionFactory();
+		List<Vehicle> vehicleList = employeeManager.fetchAllVehiclesOfAllEmployees();
 		
-		Session session = sessionFactory.openSession();*/
-		
-		List<Employee> employeeList = employeeManager.fetchAllEmployees();
-		
-		employeeList.stream().map(employee -> employee.getVehicles()).collect(Collectors.toSet())
-				.forEach(vehicle -> System.out.println(vehicle.toString()));
-		
-		/*session.close();*/
+		vehicleList.stream().forEach(vehicle -> System.out.println(vehicle));
 		
 		context.close();
 	}

@@ -3,6 +3,7 @@ package com.javabrains.dao;
 import java.util.List;
 
 import com.javabrains.model.Employee;
+import com.javabrains.model.Vehicle;
 
 public class EmployeeManagerImpl implements IEmployeeManager {
 
@@ -15,8 +16,8 @@ public class EmployeeManagerImpl implements IEmployeeManager {
 	}
 
 	@Override
-	public List<Employee> fetchAllEmployees() {
-		return iEmployeeDAO.fetchAllEmployees();
+	public List<Vehicle> fetchAllVehiclesOfAllEmployees() {
+		return iEmployeeDAO.fetchAllVehiclesOfAllEmployees();
 	}
 
 	public IEmployeeDAO getiEmployeeDAO() {
